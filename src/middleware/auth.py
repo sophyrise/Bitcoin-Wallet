@@ -1,4 +1,5 @@
-from fastapi import Header, HTTPException, status
+from fastapi import Header
+
 from src.services.user_service import UserService
 
 

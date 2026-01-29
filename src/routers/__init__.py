@@ -1,3 +1,3 @@
-from src.routers import users, wallets, transactions, statistics
+from src.routers import statistics, transactions, users, wallets
 
 __all__ = ["users", "wallets", "transactions", "statistics"]

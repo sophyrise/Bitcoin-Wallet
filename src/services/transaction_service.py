@@ -1,4 +1,4 @@
-from typing import List
+
 from src.repositories.transaction_repository import TransactionRepository
 from src.repositories.wallet_repository import WalletRepository
 from src.schemas.transaction import TransactionCreate, TransactionResponse
@@ -18,12 +18,12 @@ class TransactionService:
     ) -> TransactionResponse:
         pass
 
-    def get_transactions_by_user(self, user_id: int) -> List[TransactionResponse]:
+    def get_transactions_by_user(self, user_id: int) -> list[TransactionResponse]:
         pass
 
     def get_transactions_by_wallet(
         self, address: str, user_id: int
-    ) -> List[TransactionResponse]:
+    ) -> list[TransactionResponse]:
         pass
 
     def calculate_fee(self, amount: int, is_same_user: bool) -> int:

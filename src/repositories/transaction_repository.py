@@ -1,4 +1,4 @@
-from typing import List
+
 from src.database import Database
 from src.models.transaction import Transaction
 
@@ -12,13 +12,13 @@ class TransactionRepository:
     ) -> Transaction:
         pass
 
-    def get_by_user(self, user_id: int) -> List[Transaction]:
+    def get_by_user(self, user_id: int) -> list[Transaction]:
         pass
 
-    def get_by_wallet(self, address: str) -> List[Transaction]:
+    def get_by_wallet(self, address: str) -> list[Transaction]:
         pass
 
-    def get_all(self) -> List[Transaction]:
+    def get_all(self) -> list[Transaction]:
         pass
 
     def get_total_fees(self) -> int:

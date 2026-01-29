@@ -1,10 +1,8 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
-from src.config import settings
 from src.database import database
-from src.routers import users, wallets, transactions, statistics
-
+from src.routers import statistics, transactions, users, wallets
 
 app = FastAPI(
     title="Bitcoin Wallet API",

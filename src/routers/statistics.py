@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Depends, Header, HTTPException, status
+from fastapi import APIRouter, Depends, Header
+
+from src.database import database
+from src.repositories.transaction_repository import TransactionRepository
 from src.schemas.statistics import StatisticsResponse
 from src.services.statistics_service import StatisticsService
-from src.repositories.transaction_repository import TransactionRepository
-from src.database import database
-from src.config import settings
 
 router = APIRouter(prefix="/statistics", tags=["Statistics"])
 

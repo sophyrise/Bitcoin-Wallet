@@ -1,11 +1,11 @@
-from typing import List
 from fastapi import APIRouter, Depends, Header
-from src.schemas.wallet import WalletResponse
-from src.services.wallet_service import WalletService
-from src.services.user_service import UserService
-from src.repositories.wallet_repository import WalletRepository
-from src.repositories.user_repository import UserRepository
+
 from src.database import database
+from src.repositories.user_repository import UserRepository
+from src.repositories.wallet_repository import WalletRepository
+from src.schemas.wallet import WalletResponse
+from src.services.user_service import UserService
+from src.services.wallet_service import WalletService
 
 router = APIRouter(prefix="/wallets", tags=["Wallets"])
 

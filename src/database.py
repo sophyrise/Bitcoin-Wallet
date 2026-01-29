@@ -1,12 +1,11 @@
 import sqlite3
-from typing import Optional
 from contextlib import contextmanager
 
 from src.config import settings
 
 
 class Database:
-    def __init__(self, db_path: Optional[str] = None) -> None:
+    def __init__(self, db_path: str | None = None) -> None:
         self.db_path = db_path or settings.database_path
         self._init_database()
 

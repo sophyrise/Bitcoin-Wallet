@@ -1,6 +1,6 @@
-from typing import List
-from src.repositories.wallet_repository import WalletRepository
+
 from src.repositories.user_repository import UserRepository
+from src.repositories.wallet_repository import WalletRepository
 from src.schemas.wallet import WalletResponse
 
 
@@ -19,7 +19,7 @@ class WalletService:
     def get_wallet(self, address: str, user_id: int) -> WalletResponse:
         pass
 
-    def get_wallets_by_user(self, user_id: int) -> List[WalletResponse]:
+    def get_wallets_by_user(self, user_id: int) -> list[WalletResponse]:
         pass
 
     def satoshi_to_btc(self, satoshi: int) -> float:

@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Optional
 
 
 @dataclass
@@ -10,7 +9,7 @@ class Wallet:
     user_id: int
     balance: int
     created_at: datetime
-    
+
     @classmethod
     def from_row(cls, row) -> "Wallet":
         return cls(

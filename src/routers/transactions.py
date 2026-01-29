@@ -1,12 +1,13 @@
-from typing import List
+
 from fastapi import APIRouter, Depends, Header
+
+from src.database import database
+from src.repositories.transaction_repository import TransactionRepository
+from src.repositories.user_repository import UserRepository
+from src.repositories.wallet_repository import WalletRepository
 from src.schemas.transaction import TransactionCreate, TransactionResponse
 from src.services.transaction_service import TransactionService
 from src.services.user_service import UserService
-from src.repositories.transaction_repository import TransactionRepository
-from src.repositories.wallet_repository import WalletRepository
-from src.repositories.user_repository import UserRepository
-from src.database import database
 
 router = APIRouter(prefix="/transactions", tags=["Transactions"])
 
@@ -38,19 +39,19 @@ async def create_transaction(
     pass
 
 
-@router.get("", response_model=List[TransactionResponse])
+@router.get("", response_model=list[TransactionResponse])
 async def get_transactions(
     user_id: int = Depends(get_current_user_id),
     transaction_service: TransactionService = Depends(get_transaction_service),
-) -> List[TransactionResponse]:
+) -> list[TransactionResponse]:
     pass
 
 
-@router.get("/wallets/{address}/transactions", response_model=List[TransactionResponse])
+@router.get("/wallets/{address}/transactions", response_model=list[TransactionResponse])
 async def get_wallet_transactions(
     address: str,
     user_id: int = Depends(get_current_user_id),
     transaction_service: TransactionService = Depends(get_transaction_service),
-) -> List[TransactionResponse]:
+) -> list[TransactionResponse]:
     pass
 

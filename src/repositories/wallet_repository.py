@@ -1,4 +1,4 @@
-from typing import Optional, List
+
 from src.database import Database
 from src.models.wallet import Wallet
 
@@ -10,10 +10,10 @@ class WalletRepository:
     def create(self, address: str, user_id: int, initial_balance: int) -> Wallet:
         pass
 
-    def get_by_address(self, address: str) -> Optional[Wallet]:
+    def get_by_address(self, address: str) -> Wallet | None:
         pass
 
-    def get_by_user_id(self, user_id: int) -> List[Wallet]:
+    def get_by_user_id(self, user_id: int) -> list[Wallet]:
         pass
 
     def count_by_user_id(self, user_id: int) -> int:
