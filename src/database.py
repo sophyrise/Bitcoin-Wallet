@@ -71,28 +71,28 @@ class Database:
 
             cursor.execute(
                 """
-                CREATE INDEX IF NOT EXISTS idx_wallets_user_id 
+                CREATE INDEX IF NOT EXISTS idx_wallets_user_id
                 ON wallets(user_id)
                 """
             )
 
             cursor.execute(
                 """
-                CREATE INDEX IF NOT EXISTS idx_wallets_address 
+                CREATE INDEX IF NOT EXISTS idx_wallets_address
                 ON wallets(address)
                 """
             )
 
             cursor.execute(
                 """
-                CREATE INDEX IF NOT EXISTS idx_transactions_from_address 
+                CREATE INDEX IF NOT EXISTS idx_transactions_from_address
                 ON transactions(from_address)
                 """
             )
 
             cursor.execute(
                 """
-                CREATE INDEX IF NOT EXISTS idx_transactions_to_address 
+                CREATE INDEX IF NOT EXISTS idx_transactions_to_address
                 ON transactions(to_address)
                 """
             )

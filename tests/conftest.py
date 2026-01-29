@@ -1,7 +1,8 @@
 import pytest
 from fastapi.testclient import TestClient
-from src.main import app
+
 from src.database import Database
+from src.main import app
 
 
 @pytest.fixture
@@ -23,8 +24,10 @@ def test_user(client):
 
 
 @pytest.fixture
-def test_wallet(client, test_user):
-    pass
+def test_wallet(client: TestClient, test_user: dict) -> dict:
+    headers = {"X-API-KEY": test_user["api_key"]}
+    response = client.post("/wallets", headers=headers)
+    return response.json()
 
 
 @pytest.fixture
