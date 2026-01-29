@@ -1,4 +1,6 @@
 
+from __future__ import annotations
+
 from src.repositories.transaction_repository import TransactionRepository
 from src.repositories.wallet_repository import WalletRepository
 from src.schemas.transaction import TransactionCreate, TransactionResponse

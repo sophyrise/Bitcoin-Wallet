@@ -1,4 +1,6 @@
 
+from __future__ import annotations
+
 from src.repositories.user_repository import UserRepository
 from src.repositories.wallet_repository import WalletRepository
 from src.schemas.wallet import WalletResponse

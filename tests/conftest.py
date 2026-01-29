@@ -18,7 +18,8 @@ def client():
 
 @pytest.fixture
 def test_user(client):
-    pass
+    response = client.post("/users")
+    return response.json()
 
 
 @pytest.fixture

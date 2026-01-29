@@ -1,4 +1,6 @@
 
+from __future__ import annotations
+
 from src.database import Database
 from src.models.transaction import Transaction
 
