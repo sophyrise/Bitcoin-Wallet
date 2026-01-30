@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Any
 
 
 @dataclass
@@ -12,7 +15,7 @@ class Transaction:
     created_at: datetime
 
     @classmethod
-    def from_row(cls, row) -> "Transaction":
+    def from_row(cls, row: Any) -> Transaction:
         return cls(
             id=row["id"],
             from_address=row["from_address"],

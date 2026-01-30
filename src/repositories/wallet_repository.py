@@ -51,7 +51,7 @@ class WalletRepository:
                 (user_id,),
             )
             row = cursor.fetchone()
-            return row["count"]
+            return int(row["count"])
 
     def update_balance(self, wallet_id: int, new_balance: int) -> None:
         with self.database.get_connection() as conn:

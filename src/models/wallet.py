@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Any
 
 
 @dataclass
@@ -11,7 +14,7 @@ class Wallet:
     created_at: datetime
 
     @classmethod
-    def from_row(cls, row) -> "Wallet":
+    def from_row(cls, row: Any) -> Wallet:
         return cls(
             id=row["id"],
             address=row["address"],
