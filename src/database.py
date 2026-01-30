@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import sqlite3
+from collections.abc import Iterator
 from contextlib import contextmanager
+from typing import Any
 
 from src.config import settings
 
@@ -15,7 +17,7 @@ class Database:
         self.create_tables()
 
     @contextmanager
-    def get_connection(self):
+    def get_connection(self) -> Iterator[Any]:
         conn = sqlite3.connect(self.db_path)
         conn.row_factory = sqlite3.Row
         try:

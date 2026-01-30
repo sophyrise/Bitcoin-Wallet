@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Any
 
 
 @dataclass
@@ -9,7 +12,7 @@ class User:
     created_at: datetime
 
     @classmethod
-    def from_row(cls, row) -> "User":
+    def from_row(cls, row: Any) -> User:
         return cls(
             id=row["id"],
             api_key=row["api_key"],
