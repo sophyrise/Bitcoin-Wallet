@@ -12,7 +12,7 @@ class WalletRepository:
         with self.database.get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute(
-                "INSERT INTO wallets (address, user_id, balance) VALUES (?, ?, ?)",
+                "INSERT INTO wallets (address, user_id, balance, created_at) VALUES (?, ?, ?, CURRENT_TIMESTAMP)",
                 (address, user_id, initial_balance),
             )
             wallet_id = cursor.lastrowid

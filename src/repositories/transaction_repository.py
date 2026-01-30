@@ -15,8 +15,8 @@ class TransactionRepository:
             cursor = conn.cursor()
             cursor.execute(
                 """
-                INSERT INTO transactions (from_address, to_address, amount, fee)
-                VALUES (?, ?, ?, ?)
+                INSERT INTO transactions (from_address, to_address, amount, fee, created_at)
+                VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)
                 """,
                 (from_address, to_address, amount, fee),
             )

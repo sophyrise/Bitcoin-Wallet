@@ -1,6 +1,7 @@
 import pytest
 from fastapi.testclient import TestClient
 
+from src.config import settings
 from src.database import Database
 from src.main import app
 
@@ -32,5 +33,5 @@ def test_wallet(client: TestClient, test_user: dict) -> dict:
 
 @pytest.fixture
 def admin_headers():
-    pass
+    return {"X-API-KEY": settings.admin_api_key}
 

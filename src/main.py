@@ -14,6 +14,7 @@ app = FastAPI(
 @app.on_event("startup")
 async def startup_event() -> None:
     database.create_tables()
+    print("Swagger docs: http://127.0.0.1:8000/docs")
 
 
 @app.on_event("shutdown")
