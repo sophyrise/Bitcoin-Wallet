@@ -11,10 +11,13 @@ class UserRepository:
     def create(self, api_key: str) -> User:
         with self.database.get_connection() as conn:
             cursor = conn.cursor()
-            cursor.execute(
-                "INSERT INTO users (api_key) VALUES (?)",
-                (api_key,),
-            )
+            try:
+                cursor.execute(
+                    "INSERT INTO users (api_key, created_at) VALUES (?, CURRENT_TIMESTAMP)",
+                    (api_key,),
+                )
+            except Exception as exc:
+                raise
             user_id = cursor.lastrowid
             cursor.execute(
                 "SELECT * FROM users WHERE id = ?",
