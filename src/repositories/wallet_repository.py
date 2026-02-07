@@ -61,3 +61,27 @@ class WalletRepository:
                 (new_balance, wallet_id),
             )
 
+    def get_addresses_by_user_ids(
+        self, user_ids: list[int]
+    ) -> dict[int, list[str]]:
+        if not user_ids:
+            return {}
+
+        placeholders = ", ".join(["?"] * len(user_ids))
+        query = (
+            "SELECT user_id, address FROM wallets "
+            f"WHERE user_id IN ({placeholders}) "
+            "ORDER BY user_id ASC, created_at ASC"
+        )
+
+        with self.database.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute(query, tuple(user_ids))
+            rows = cursor.fetchall()
+
+        addresses: dict[int, list[str]] = {}
+        for row in rows:
+            user_id = int(row["user_id"])
+            addresses.setdefault(user_id, []).append(row["address"])
+        return addresses
+

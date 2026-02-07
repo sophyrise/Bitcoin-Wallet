@@ -2,9 +2,12 @@ from fastapi import APIRouter, Depends
 
 from src.database import database
 from src.middleware.auth import verify_api_key
+from src.repositories.transaction_repository import TransactionRepository
 from src.repositories.user_repository import UserRepository
 from src.repositories.wallet_repository import WalletRepository
+from src.schemas.transaction import TransactionResponse
 from src.schemas.wallet import WalletResponse
+from src.services.transaction_service import TransactionService
 from src.services.wallet_service import WalletService
 
 router = APIRouter(prefix="/wallets", tags=["Wallets"])
@@ -14,6 +17,12 @@ def get_wallet_service() -> WalletService:
     wallet_repository = WalletRepository(database)
     user_repository = UserRepository(database)
     return WalletService(wallet_repository, user_repository)
+
+
+def get_transaction_service() -> TransactionService:
+    transaction_repository = TransactionRepository(database)
+    wallet_repository = WalletRepository(database)
+    return TransactionService(transaction_repository, wallet_repository)
 
 
 @router.post("", response_model=WalletResponse, status_code=201)
@@ -31,4 +40,13 @@ async def get_wallet(
     wallet_service: WalletService = Depends(get_wallet_service),
 ) -> WalletResponse:
     return await wallet_service.get_wallet(address, user_id)
+
+
+@router.get("/{address}/transactions", response_model=list[TransactionResponse])
+async def get_wallet_transactions(
+    address: str,
+    user_id: int = Depends(verify_api_key),
+    transaction_service: TransactionService = Depends(get_transaction_service),
+) -> list[TransactionResponse]:
+    return transaction_service.get_transactions_by_wallet(address, user_id)
 
