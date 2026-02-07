@@ -46,3 +46,10 @@ class UserRepository:
             row = cursor.fetchone()
             return User.from_row(row) if row else None
 
+    def get_all(self) -> list[User]:
+        with self.database.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM users ORDER BY created_at ASC")
+            rows = cursor.fetchall()
+            return [User.from_row(row) for row in rows]
+

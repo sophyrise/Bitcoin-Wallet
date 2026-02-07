@@ -125,7 +125,7 @@ class TestTransactionRetrieval:
         client.post("/transactions", json=transaction_data, headers=headers)
 
         response = client.get(
-            f"/transactions/wallets/{wallet1['address']}/transactions", headers=headers
+            f"/wallets/{wallet1['address']}/transactions", headers=headers
         )
         assert response.status_code == 200
         data = response.json()

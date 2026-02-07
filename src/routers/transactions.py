@@ -34,12 +34,3 @@ async def get_transactions(
 ) -> list[TransactionResponse]:
     return transaction_service.get_transactions_by_user(user_id)
 
-
-@router.get("/wallets/{address}/transactions", response_model=list[TransactionResponse])
-async def get_wallet_transactions(
-    address: str,
-    user_id: int = Depends(verify_api_key),
-    transaction_service: TransactionService = Depends(get_transaction_service),
-) -> list[TransactionResponse]:
-    return transaction_service.get_transactions_by_wallet(address, user_id)
-
