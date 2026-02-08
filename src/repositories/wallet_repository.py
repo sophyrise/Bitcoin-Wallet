@@ -61,6 +61,43 @@ class WalletRepository:
                 (new_balance, wallet_id),
             )
 
+    def get_total_balance(self) -> int:
+        with self.database.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                "SELECT COALESCE(SUM(balance), 0) as total_balance FROM wallets"
+            )
+            row = cursor.fetchone()
+            return int(row["total_balance"])
+
+    def get_top_users_by_balance(self, limit: int) -> list[dict[str, int | str]]:
+        with self.database.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                """
+                SELECT u.id as user_id,
+                       u.api_key as api_key,
+                       COALESCE(SUM(w.balance), 0) as total_balance,
+                       COUNT(w.id) as wallet_count
+                FROM users u
+                LEFT JOIN wallets w ON w.user_id = u.id
+                GROUP BY u.id
+                ORDER BY total_balance DESC
+                LIMIT ?
+                """,
+                (limit,),
+            )
+            rows = cursor.fetchall()
+            return [
+                {
+                    "user_id": int(row["user_id"]),
+                    "api_key": row["api_key"],
+                    "total_balance": int(row["total_balance"]),
+                    "wallet_count": int(row["wallet_count"]),
+                }
+                for row in rows
+            ]
+
     def get_addresses_by_user_ids(
         self, user_ids: list[int]
     ) -> dict[int, list[str]]:

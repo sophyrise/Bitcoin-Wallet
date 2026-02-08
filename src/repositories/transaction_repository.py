@@ -82,3 +82,30 @@ class TransactionRepository:
             row = cursor.fetchone()
             return int(row["count"])
 
+    def get_fee_breakdown_by_day(
+        self, limit: int | None = None
+    ) -> list[dict[str, str | int]]:
+        query = (
+            "SELECT DATE(created_at) as day, "
+            "COALESCE(SUM(fee), 0) as total_fee "
+            "FROM transactions "
+            "GROUP BY day "
+            "ORDER BY day DESC"
+        )
+        params: tuple[int, ...] = ()
+        if limit is not None:
+            query = f"{query} LIMIT ?"
+            params = (limit,)
+
+        with self.database.get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute(query, params)
+            rows = cursor.fetchall()
+            return [
+                {
+                    "day": row["day"],
+                    "total_fee": int(row["total_fee"]),
+                }
+                for row in rows
+            ]
+
