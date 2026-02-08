@@ -1,12 +1,12 @@
 from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class TransactionCreate(BaseModel):
     from_address: str
     to_address: str
-    amount_btc: float
+    amount_btc: float = Field(..., gt=0)
 
 
 class TransactionResponse(BaseModel):

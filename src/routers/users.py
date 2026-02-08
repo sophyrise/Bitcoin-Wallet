@@ -17,5 +17,5 @@ def get_user_service() -> UserService:
 async def register_user(
     user_service: UserService = Depends(get_user_service),
 ) -> UserResponse:
-    pass
+    return user_service.register_user()
 

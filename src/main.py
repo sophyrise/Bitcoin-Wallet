@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
 from src.database import database
-from src.routers import statistics, transactions, users, wallets
+from src.routers import admin, statistics, transactions, users, wallets
 
 app = FastAPI(
     title="Bitcoin Wallet API",
@@ -14,6 +14,7 @@ app = FastAPI(
 @app.on_event("startup")
 async def startup_event() -> None:
     database.create_tables()
+    print("Swagger docs: http://127.0.0.1:8000/docs")
 
 
 @app.on_event("shutdown")
@@ -32,4 +33,5 @@ app.include_router(users.router)
 app.include_router(wallets.router)
 app.include_router(transactions.router)
 app.include_router(statistics.router)
+app.include_router(admin.router)
 
